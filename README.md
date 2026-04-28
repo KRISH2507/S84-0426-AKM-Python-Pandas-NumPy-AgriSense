@@ -101,6 +101,17 @@ If you like this project:
 🍴 Fork it
 🛠️ Contribute
 
+🌟 Future Enhancements
+
+🔔 Real-time notifications
+📡 Live API integration for market & weather
+📱 Mobile responsiveness improvements
+🤖 AI-based crop recommendations
+
+📜 License
+
+This project is licensed under the MIT License.
+
 ## Contributors - 
 
 ### Arman Singh
