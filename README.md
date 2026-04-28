@@ -112,10 +112,12 @@ If you like this project:
 
 This project is licensed under the MIT License.
 
+### Deploy Link - https://agrisensehub.vercel.app/
+
 ## Contributors - 
 
-### Arman Singh
+#### Arman Singh
 
-### Manvi Dadhwal
+#### Manvi Dadhwal
 
-### Krishdeep Singh
+#### Krishdeep Singh
