@@ -73,7 +73,7 @@ S84-0426-AKM-Python-Pandas-NumPy-AgriSense/
 └── requirements.txt              # Python dependencies (if added)
 ```
 
-🚀 Getting Started
+## 🚀 Getting Started
 
 🔧 Prerequisites
 
@@ -100,7 +100,7 @@ npm install
 pip install -r requirements.txt
 ```
 
-💡 Show Your Support
+##💡 Show Your Support
 
 If you like this project:
 
@@ -110,14 +110,18 @@ If you like this project:
 
 🛠️ Contribute
 
-🌟 Future Enhancements
+## 🌟 Future Enhancements
 
 🔔 Real-time notifications
+
 📡 Live API integration for market & weather
+
 📱 Mobile responsiveness improvements
+
 🤖 AI-based crop recommendations
 
-📜 License
+
+## 📜 License
 
 This project is licensed under the MIT License.
 
