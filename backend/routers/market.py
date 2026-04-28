@@ -1,3 +1,18 @@
+"""
+Market Data API Router
+
+This module provides FastAPI endpoints for accessing agricultural market data,
+including crop prices, volatility metrics, and historical trends.
+
+Endpoints:
+    GET /api/market-data - Fetch comprehensive market data for a specific crop
+
+Services:
+    - Leverages DataService for data retrieval and feature engineering
+    - Integrates with SQLAlchemy ORM for database operations
+    - Returns standardized MarketDataResponse schema for frontend consumption
+"""
+
 from fastapi import APIRouter, Query, HTTPException
 from schemas import MarketDataResponse
 from services.data_service import data_service

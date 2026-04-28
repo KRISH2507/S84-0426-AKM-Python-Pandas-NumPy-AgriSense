@@ -34,9 +34,12 @@ def find_canonical_crop(crop: str) -> str:
             return canonical.capitalize()  # Return capitalized form (Wheat, Rice, etc.)
     return crop.strip().capitalize()  # fallback to capitalize the input string
 
-def get_all_canonical_crops() -> list:
-    """Get all canonical crop names."""
-    return [key.capitalize() for key in CROP_ALIASES.keys()]
+def get_all_canonical_crops() -> List[str]:
+    \"\"\"Get list of all supported canonical crop names.
+    
+    Returns:
+        List of canonical crop names in title case
+    \"\"\"\n    return [key.capitalize() for key in CROP_ALIASES.keys()]
 
 def log_crop_search(requested: str, canonical: str, found: bool, count: int = 0):
     """Log crop search results for debugging."""
