@@ -71,6 +71,27 @@ S84-0426-AKM-Python-Pandas-NumPy-AgriSense/
 │
 ├── README.md                     # Project documentation
 └── requirements.txt              # Python dependencies (if added)
+```
+
+🚀 Getting Started
+
+🔧 Prerequisites
+Node.js
+Python (3.x)
+npm / yarn
+⚡ Installation
+
+# Clone the repository
+git clone https://github.com/your-username/agrisense.git
+
+# Navigate into project
+cd agrisense
+
+# Install frontend dependencies
+npm install
+
+# Install Python dependencies
+pip install -r requirements.txt
 
 ## Contributions
 

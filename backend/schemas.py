@@ -1,8 +1,4 @@
-from pydantic import BaseModel, Field
-from typing import List, Optional
-
-class PricePoint(BaseModel):
-    """Schema for individual data points in sparklines/charts"""
+\"\"\"\nPydantic Data Schemas for AgriSense API\n\nThis module defines all request and response schemas used across the AgriSense API.\nUsing Pydantic ensures:\n  - Type validation on all API inputs/outputs\n  - Automatic OpenAPI documentation generation\n  - Consistent data structure across frontend and backend\n  - Clear separation between data layers\n\nSchema Categories:\n  1. Market Data Schemas (prices, volatility, trends)\n  2. Yield Prediction Schemas (requests and predictions)\n  3. Climate Risk Schemas (climate risk assessments)\n  4. LLM Insight Schemas (conversational AI and insights)\n\"\"\"\n\nfrom pydantic import BaseModel, Field\nfrom typing import List, Optional\n\n\nclass PricePoint(BaseModel):\n    \"\"\"Individual price data point for time-series visualization.\n    \n    Used in sparklines and charts to show historical price trends.\n    \"\"\""
     date: str = Field(..., description="Date of the record (YYYY-MM-DD)")
     price: float = Field(..., description="Modal price on that date")
 
@@ -31,14 +27,14 @@ class YieldPredictRequest(BaseModel):
     soil_type: Optional[str] = Field("Alluvial", description="Soil type")
 
 class YieldPredictResponse(BaseModel):
-    predicted_yield: float
+    \"\"\"Response schema for yield prediction with confidence metrics.\n    \n    Contains predicted yield value, historical comparison, and model confidence.\n    \"\"\"\n    predicted_yield: float
     unit: str
     confidence_pct: int
     historical_avg: float
     message: str
 
-# --- Climate Risk Schemas (3.4) ---
-class ClimateRiskResponse(BaseModel):
+
+class ClimateRiskResponse(BaseModel):\n    \"\"\"Response schema for climate-based risk assessment.\n    \n    Provides overall risk level, score, and component-level risk metrics\n    for drought, flood, and frost conditions.\n    \"\"\""
     risk_level: str
     risk_score: int
     drought_risk: int
@@ -46,26 +42,29 @@ class ClimateRiskResponse(BaseModel):
     frost_risk: int
     irrigation_advice: str
 
-# --- LLM Insight Schemas (3.5) ---
 class ChatMessage(BaseModel):
-    role: str
+    \"\"\"Single message in a chat conversation.\n    \n    Represents either a user query or assistant response in the conversation history.\n    \"\"\"\n    role: str
     content: str
 
+
 class ChatRequest(BaseModel):
-    message: str
+    \"\"\"Request schema for multi-turn conversational insights.\n    \n    Includes current message, conversation history for context, and optional user profile.\n    \"\"\"\n    message: str
     history: List[ChatMessage] = []
     user_profile: Optional[dict] = None
 
+
 class InsightRequest(BaseModel):
-    crop: str
+    \"\"\"Request schema for generating AI-powered agricultural insights.\n    \n    Combines crop, yield prediction, market price, and climate risk data\n    to generate personalized recommendations.\n    \"\"\"\n    crop: str
     predicted_yield: float
     current_price: float
     climate_risk_level: str
-    location: Optional[str] = "Himachal Pradesh"
+    location: Optional[str] = \"Himachal Pradesh\"
+
 
 class InsightResponse(BaseModel):
-    insight_text: str
+    \"\"\"Response schema containing generated insight text.\n    \n    AI-generated recommendations and analysis based on input parameters.\n    \"\"\"\n    insight_text: str
+
 
 class ChatResponse(BaseModel):
-    reply: str
+    \"\"\"Response schema for chat endpoint.\n    \n    Contains the assistant's reply to the user's latest message.\n    \"\"\"\n    reply: str
 
