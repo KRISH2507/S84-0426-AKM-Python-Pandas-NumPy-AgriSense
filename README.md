@@ -81,19 +81,30 @@ Python (3.x)
 npm / yarn
 ⚡ Installation
 
-# Clone the repository
+### Clone the repository
 git clone https://github.com/your-username/agrisense.git
 
-# Navigate into project
+### Navigate into project
 cd agrisense
 
-# Install frontend dependencies
+### Install frontend dependencies
 npm install
 
-# Install Python dependencies
+### Install Python dependencies
 pip install -r requirements.txt
 
-## Contributions
+💡 Show Your Support
+
+If you like this project:
+
+⭐ Star the repository
+🍴 Fork it
+🛠️ Contribute
+
+## Contributors - 
 
 ### Arman Singh
-Built out the Profile page (`/profile`) from a placeholder into a fully functional farm profile form. Includes editable fields for farmer name, state, primary crop, farm area, and current season — with a live farm summary card and save confirmation feedback.
+
+### Manvi Dadhwal
+
+### Krishdeep Singh
