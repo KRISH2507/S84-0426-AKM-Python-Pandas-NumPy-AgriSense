@@ -42,4 +42,4 @@ def log_crop_search(requested: str, canonical: str, found: bool, count: int = 0)
     """Log crop search results for debugging."""
     status = "FOUND" if found else "NOT_FOUND"
     count_msg = f"({count} records)" if found else ""
-    print(f"[CROP_SEARCH] Requested: '{requested}' → Canonical: '{canonical}' → {status} {count_msg}")
+    print(f"[CROP_SEARCH] Requested: '{requested}' -> Canonical: '{canonical}' -> {status} {count_msg}")

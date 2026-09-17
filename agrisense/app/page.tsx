@@ -18,13 +18,13 @@ export default function LandingPage() {
         </p>
         <div className="flex gap-4 mt-4">
           <Link
-            href="/signin"
+            href="/signin?mode=signup"
             className="bg-[#7A3B2E] text-[#F5F0E8] rounded-[24px] px-[28px] py-[12px] font-medium text-[14px] hover:opacity-90 transition-opacity"
           >
             {t("landing.getStarted")}
           </Link>
           <Link
-            href="/signin"
+            href="/signin?mode=signin"
             className="border border-[#7A3B2E] text-[#7A3B2E] rounded-[24px] px-[28px] py-[12px] font-medium text-[14px] hover:bg-[#EDE3D3] transition-colors"
           >
             {t("nav.signIn")}

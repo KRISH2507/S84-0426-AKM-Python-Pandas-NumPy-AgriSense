@@ -1,0 +1,25 @@
+{
+  "name": "AgriSense - Agricultural Intelligence Platform",
+  "short_name": "AgriSense",
+  "description": "One-stop agricultural intelligence for farmers: Mandi wholesale prices, AI advisor, crop yield predictions, government subsidies, and PMFBY crop insurance.",
+  "start_url": "/dashboard",
+  "display": "standalone",
+  "background_color": "#F5F1EA",
+  "theme_color": "#7A3B2E",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/globe.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/globe.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["agriculture", "finance", "weather", "productivity"]
+}
