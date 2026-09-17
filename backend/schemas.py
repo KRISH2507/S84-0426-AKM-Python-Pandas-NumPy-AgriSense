@@ -1,4 +1,29 @@
-\"\"\"\nPydantic Data Schemas for AgriSense API\n\nThis module defines all request and response schemas used across the AgriSense API.\nUsing Pydantic ensures:\n  - Type validation on all API inputs/outputs\n  - Automatic OpenAPI documentation generation\n  - Consistent data structure across frontend and backend\n  - Clear separation between data layers\n\nSchema Categories:\n  1. Market Data Schemas (prices, volatility, trends)\n  2. Yield Prediction Schemas (requests and predictions)\n  3. Climate Risk Schemas (climate risk assessments)\n  4. LLM Insight Schemas (conversational AI and insights)\n\"\"\"\n\nfrom pydantic import BaseModel, Field\nfrom typing import List, Optional\n\n\nclass PricePoint(BaseModel):\n    \"\"\"Individual price data point for time-series visualization.\n    \n    Used in sparklines and charts to show historical price trends.\n    \"\"\""
+"""
+Pydantic Data Schemas for AgriSense API
+
+This module defines all request and response schemas used across the AgriSense API.
+Using Pydantic ensures:
+  - Type validation on all API inputs/outputs
+  - Automatic OpenAPI documentation generation
+  - Consistent data structure across frontend and backend
+  - Clear separation between data layers
+
+Schema Categories:
+  1. Market Data Schemas (prices, volatility, trends)
+  2. Yield Prediction Schemas (requests and predictions)
+  3. Climate Risk Schemas (climate risk assessments)
+  4. LLM Insight Schemas (conversational AI and insights)
+"""
+
+from pydantic import BaseModel, Field
+from typing import List, Optional
+
+
+class PricePoint(BaseModel):
+    """Individual price data point for time-series visualization.
+    
+    Used in sparklines and charts to show historical price trends.
+    """
     date: str = Field(..., description="Date of the record (YYYY-MM-DD)")
     price: float = Field(..., description="Modal price on that date")
 
@@ -27,14 +52,23 @@ class YieldPredictRequest(BaseModel):
     soil_type: Optional[str] = Field("Alluvial", description="Soil type")
 
 class YieldPredictResponse(BaseModel):
-    \"\"\"Response schema for yield prediction with confidence metrics.\n    \n    Contains predicted yield value, historical comparison, and model confidence.\n    \"\"\"\n    predicted_yield: float
+    """Response schema for yield prediction with confidence metrics.
+    
+    Contains predicted yield value, historical comparison, and model confidence.
+    """
+    predicted_yield: float
     unit: str
     confidence_pct: int
     historical_avg: float
     message: str
 
 
-class ClimateRiskResponse(BaseModel):\n    \"\"\"Response schema for climate-based risk assessment.\n    \n    Provides overall risk level, score, and component-level risk metrics\n    for drought, flood, and frost conditions.\n    \"\"\""
+class ClimateRiskResponse(BaseModel):
+    """Response schema for climate-based risk assessment.
+    
+    Provides overall risk level, score, and component-level risk metrics
+    for drought, flood, and frost conditions.
+    """
     risk_level: str
     risk_score: int
     drought_risk: int
@@ -43,30 +77,51 @@ class ClimateRiskResponse(BaseModel):\n    \"\"\"Response schema for climate-bas
     irrigation_advice: str
 
 class ChatMessage(BaseModel):
-    \"\"\"Single message in a chat conversation.\n    \n    Represents either a user query or assistant response in the conversation history.\n    \"\"\"\n    role: str
+    """Single message in a chat conversation.
+    
+    Represents either a user query or assistant response in the conversation history.
+    """
+    role: str
     content: str
 
 
 class ChatRequest(BaseModel):
-    \"\"\"Request schema for multi-turn conversational insights.\n    \n    Includes current message, conversation history for context, and optional user profile.\n    \"\"\"\n    message: str
+    """Request schema for multi-turn conversational insights.
+    
+    Includes current message, conversation history for context, and optional user profile.
+    """
+    message: str
     history: List[ChatMessage] = []
     user_profile: Optional[dict] = None
 
 
 class InsightRequest(BaseModel):
-    \"\"\"Request schema for generating AI-powered agricultural insights.\n    \n    Combines crop, yield prediction, market price, and climate risk data\n    to generate personalized recommendations.\n    \"\"\"\n    crop: str
+    """Request schema for generating AI-powered agricultural insights.
+    
+    Combines crop, yield prediction, market price, and climate risk data
+    to generate personalized recommendations.
+    """
+    crop: str
     predicted_yield: float
     current_price: float
     climate_risk_level: str
-    location: Optional[str] = \"Himachal Pradesh\"
+    location: Optional[str] = "Himachal Pradesh"
 
 
 class InsightResponse(BaseModel):
-    \"\"\"Response schema containing generated insight text.\n    \n    AI-generated recommendations and analysis based on input parameters.\n    \"\"\"\n    insight_text: str
+    """Response schema containing generated insight text.
+    
+    AI-generated recommendations and analysis based on input parameters.
+    """
+    insight_text: str
 
 
 class ChatResponse(BaseModel):
-    \"\"\"Response schema for chat endpoint.\n    \n    Contains the assistant's reply to the user's latest message.\n    \"\"\"\n    reply: str
+    """Response schema for chat endpoint.
+    
+    Contains the assistant's reply to the user's latest message.
+    """
+    reply: str
 
 # --- Subsidies & Insurance Schemas ---
 class SubsidySchemeItem(BaseModel):
