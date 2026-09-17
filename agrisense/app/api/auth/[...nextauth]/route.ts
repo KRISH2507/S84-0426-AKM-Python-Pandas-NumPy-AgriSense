@@ -29,7 +29,7 @@ const handler = NextAuth({
     }),
   ],
   secret: process.env.NEXTAUTH_SECRET || 'fallback-secret-for-dev',
-  pages: { signIn: '/', error: '/' },
+  pages: { signIn: '/signin', error: '/signin' },
   callbacks: {
     async session({ session, token }) {
       if (session?.user && token?.email) {
@@ -39,8 +39,37 @@ const handler = NextAuth({
       return session;
     },
     async redirect({ url, baseUrl }) {
-      if (url.startsWith("/")) return `${baseUrl}${url}`;
-      if (new URL(url).origin === baseUrl) return url;
+      // 1. If relative URL, resolve against current baseUrl
+      if (url.startsWith("/")) {
+        return `${baseUrl}${url}`;
+      }
+
+      try {
+        const targetUrl = new URL(url);
+        const currentBase = new URL(baseUrl);
+
+        // 2. Allow same origin
+        if (targetUrl.origin === currentBase.origin) {
+          return url;
+        }
+
+        // 3. Allow local origins
+        if (targetUrl.hostname === "localhost" || targetUrl.hostname === "127.0.0.1") {
+          return url;
+        }
+
+        // 4. Allow deployed production and preview domains
+        if (
+          targetUrl.hostname === "agrisensehub.vercel.app" ||
+          targetUrl.hostname.endsWith(".vercel.app") ||
+          targetUrl.hostname.includes("agrisense")
+        ) {
+          return url;
+        }
+      } catch {
+        // Fall back to baseUrl dashboard
+      }
+
       return `${baseUrl}/dashboard`;
     },
   },

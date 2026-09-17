@@ -109,11 +109,18 @@ export interface AlertsResponse {
   alerts: FieldAlert[];
 }
 
-const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000";
+function getBackendUrl(): string {
+  if (typeof window !== "undefined") {
+    if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
+      return "http://localhost:8000";
+    }
+  }
+  return process.env.NEXT_PUBLIC_BACKEND_URL || process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+}
 
 export async function diagnoseDisease(crop: string, affected_part: string, symptoms: string[]): Promise<DiagnosisResult[]> {
   try {
-    const res = await fetch(`${BACKEND_URL}/api/crop-doctor/diagnose`, {
+    const res = await fetch(`${getBackendUrl()}/api/crop-doctor/diagnose`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ crop, affected_part, symptoms }),
@@ -129,7 +136,7 @@ export async function diagnoseDisease(crop: string, affected_part: string, sympt
 
 export async function fetchSymptomsCatalog(): Promise<Record<string, Array<{ id: string; en: string; hi: string; mr: string; ta: string }>>> {
   try {
-    const res = await fetch(`${BACKEND_URL}/api/crop-doctor/symptoms-catalog`);
+    const res = await fetch(`${getBackendUrl()}/api/crop-doctor/symptoms-catalog`);
     if (!res.ok) throw new Error("Catalog fetch failed");
     return await res.json();
   } catch (err) {
@@ -152,7 +159,7 @@ export async function fetchSymptomsCatalog(): Promise<Record<string, Array<{ id:
 
 export async function calculateDosage(disease_id: string, acres: number): Promise<DosageCalculation | null> {
   try {
-    const res = await fetch(`${BACKEND_URL}/api/crop-doctor/dosage?disease_id=${encodeURIComponent(disease_id)}&acres=${acres}`);
+    const res = await fetch(`${getBackendUrl()}/api/crop-doctor/dosage?disease_id=${encodeURIComponent(disease_id)}&acres=${acres}`);
     if (!res.ok) throw new Error("Dosage calculation failed");
     return await res.json();
   } catch (err) {
@@ -168,7 +175,7 @@ export async function fetchClimateForecast(lat?: number, lon?: number, crop?: st
     if (lon) params.append("lon", lon.toString());
     if (crop) params.append("crop", crop);
 
-    const res = await fetch(`${BACKEND_URL}/api/climate-risk/forecast?${params.toString()}`);
+    const res = await fetch(`${getBackendUrl()}/api/climate-risk/forecast?${params.toString()}`);
     if (!res.ok) throw new Error("Forecast fetch failed");
     return await res.json();
   } catch (err) {
@@ -183,7 +190,7 @@ export async function fetchFieldAlerts(lat?: number, lon?: number, crop: string 
     if (lat) params.append("lat", lat.toString());
     if (lon) params.append("lon", lon.toString());
 
-    const res = await fetch(`${BACKEND_URL}/api/climate-risk/alerts?${params.toString()}`);
+    const res = await fetch(`${getBackendUrl()}/api/climate-risk/alerts?${params.toString()}`);
     if (!res.ok) throw new Error("Field alerts fetch failed");
     return await res.json();
   } catch (err) {

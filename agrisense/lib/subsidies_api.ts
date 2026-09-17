@@ -1,4 +1,11 @@
-const BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL || process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+function getBaseUrl(): string {
+  if (typeof window !== "undefined") {
+    if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
+      return "http://localhost:8000";
+    }
+  }
+  return process.env.NEXT_PUBLIC_BACKEND_URL || process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+}
 
 export interface SubsidySchemeItem {
   id: string;
@@ -84,7 +91,7 @@ export async function getRecommendedSubsidies(params: {
   });
   if (params.season) query.append("season", params.season);
 
-  const res = await fetch(`${BASE_URL}/api/subsidies/recommended?${query.toString()}`, {
+  const res = await fetch(`${getBaseUrl()}/api/subsidies/recommended?${query.toString()}`, {
     cache: "no-store"
   });
   if (!res.ok) {
@@ -110,7 +117,7 @@ export async function getInsuranceQuote(params: {
     query.append("custom_coverage_per_acre", params.custom_coverage_per_acre.toString());
   }
 
-  const res = await fetch(`${BASE_URL}/api/insurance/quote?${query.toString()}`, {
+  const res = await fetch(`${getBaseUrl()}/api/insurance/quote?${query.toString()}`, {
     cache: "no-store"
   });
   if (!res.ok) {
@@ -129,7 +136,7 @@ export async function ingestNewScheme(payload: {
   scheme?: SubsidySchemeItem;
   message: string;
 }> {
-  const res = await fetch(`${BASE_URL}/api/subsidies/ingest`, {
+  const res = await fetch(`${getBaseUrl()}/api/subsidies/ingest`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload),

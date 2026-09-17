@@ -1,4 +1,11 @@
-const BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL || process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+function getBaseUrl(): string {
+  if (typeof window !== "undefined") {
+    if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
+      return "http://localhost:8000";
+    }
+  }
+  return process.env.NEXT_PUBLIC_BACKEND_URL || process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+}
 
 export interface MandiRecordItem {
   market: string;
@@ -49,7 +56,7 @@ export async function getMandiRates(params?: {
   if (params?.search) query.append("search", params.search);
   if (params?.sort_by) query.append("sort_by", params.sort_by);
 
-  const res = await fetch(`${BASE_URL}/api/mandi/rates?${query.toString()}`, {
+  const res = await fetch(`${getBaseUrl()}/api/mandi/rates?${query.toString()}`, {
     cache: "no-store",
   });
   if (!res.ok) {
@@ -60,7 +67,7 @@ export async function getMandiRates(params?: {
 
 export async function getMandiArbitrage(commodity = "Wheat", state = "Punjab"): Promise<MandiArbitrageResponse> {
   const query = new URLSearchParams({ commodity, state });
-  const res = await fetch(`${BASE_URL}/api/mandi/arbitrage?${query.toString()}`, {
+  const res = await fetch(`${getBaseUrl()}/api/mandi/arbitrage?${query.toString()}`, {
     cache: "no-store",
   });
   if (!res.ok) {
@@ -70,7 +77,7 @@ export async function getMandiArbitrage(commodity = "Wheat", state = "Punjab"): 
 }
 
 export async function syncMandiRates(): Promise<{ success: boolean; message: string; last_sync: string }> {
-  const res = await fetch(`${BASE_URL}/api/mandi/sync`, {
+  const res = await fetch(`${getBaseUrl()}/api/mandi/sync`, {
     method: "POST",
   });
   if (!res.ok) {

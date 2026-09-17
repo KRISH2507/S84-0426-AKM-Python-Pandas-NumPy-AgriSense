@@ -49,15 +49,21 @@ app = FastAPI(
 origins = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
-    "https://agrisensehub.vercel.app"
+    "https://agrisensehub.vercel.app",
 ]
+
+# Allow custom frontend origins specified via environment variable
+custom_origins = os.getenv("ALLOWED_ORIGINS", "")
+if custom_origins:
+    origins.extend([o.strip() for o in custom_origins.split(",") if o.strip()])
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,   # Allowed Frontend URLs
+    allow_origins=origins,
+    allow_origin_regex=r"https://.*\.vercel\.app",
     allow_credentials=True,
-    allow_methods=["*"],     # Allows all HTTP methods (GET, POST, OPTIONS, etc.)
-    allow_headers=["*"],     # Allows all headers (Authorization, Content-Type, etc.)
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 # ------------------------------------------------------------------

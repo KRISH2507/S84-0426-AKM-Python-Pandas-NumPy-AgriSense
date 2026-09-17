@@ -54,7 +54,14 @@ export interface PriceForecastResponse {
   projections: ForecastPoint[];
 }
 
-const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000";
+function getBackendUrl(): string {
+  if (typeof window !== "undefined") {
+    if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
+      return "http://localhost:8000";
+    }
+  }
+  return process.env.NEXT_PUBLIC_BACKEND_URL || process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+}
 
 // Fast client-side in-memory cache to make page switching instant
 const clientCache = new Map<string, { data: any; expiresAt: number }>();
@@ -80,7 +87,7 @@ export async function fetchMarketData(crop: string, state?: string): Promise<Mar
     const params = new URLSearchParams({ crop });
     if (state) params.append("state", state);
 
-    const res = await fetch(`${BACKEND_URL}/api/market-data?${params.toString()}`);
+    const res = await fetch(`${getBackendUrl()}/api/market-data?${params.toString()}`);
     if (!res.ok) throw new Error("Failed to fetch market data");
     const data: MarketData = await res.json();
     setToClientCache(cacheKey, data, 300);
@@ -100,7 +107,7 @@ export async function fetchPriceForecast(crop: string, state?: string, horizonDa
     const params = new URLSearchParams({ crop, horizon_days: horizonDays.toString() });
     if (state) params.append("state", state);
 
-    const res = await fetch(`${BACKEND_URL}/api/market-data/forecast?${params.toString()}`);
+    const res = await fetch(`${getBackendUrl()}/api/market-data/forecast?${params.toString()}`);
     if (!res.ok) throw new Error("Failed to fetch price forecast");
     const data: PriceForecastResponse = await res.json();
     setToClientCache(cacheKey, data, 300);

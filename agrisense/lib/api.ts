@@ -3,8 +3,14 @@
  * Communicates with FastAPI backend with built-in in-memory caching and request deduplication
  */
 
-// Dynamically use the environment variable to ensure no hardcoded production paths!
-const BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL || process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+export function getApiBaseUrl(): string {
+  if (typeof window !== "undefined") {
+    if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
+      return "http://localhost:8000";
+    }
+  }
+  return process.env.NEXT_PUBLIC_BACKEND_URL || process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+}
 
 // In-memory cache for GET requests to achieve instant (0ms) page re-visits
 interface CacheEntry {
@@ -24,8 +30,9 @@ async function fetchWithHandler(
   timeoutMs = 5000,
   useCache = false
 ) {
+  const baseUrl = getApiBaseUrl();
   const isGet = !options.method || options.method.toUpperCase() === "GET";
-  const cacheKey = `${BASE_URL}${endpoint}`;
+  const cacheKey = `${baseUrl}${endpoint}`;
 
   // 1. Check cache for GET requests
   if (isGet && useCache) {
@@ -49,7 +56,7 @@ async function fetchWithHandler(
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
 
-      const response = await fetch(`${BASE_URL}${endpoint}`, {
+      const response = await fetch(`${baseUrl}${endpoint}`, {
         ...options,
         headers: {
           ...defaultHeaders,
