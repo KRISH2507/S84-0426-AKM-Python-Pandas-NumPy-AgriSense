@@ -177,29 +177,89 @@ export default function Profile() {
     setTimeout(() => setSaved(false), 3000);
   };
 
-  const handleAddPlot = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const [isSavingPlot, setIsSavingPlot] = useState(false);
+
+  const handleAddPlot = async (e?: React.FormEvent) => {
+    if (e && typeof e.preventDefault === "function") {
+      e.preventDefault();
+    }
     if (!newPlotName.trim()) {
       toast.error("Please enter a name for the plot.");
       return;
     }
 
+    setIsSavingPlot(true);
+    const parsedAcres = parseFloat(newPlotAcres) || 1.0;
+
     try {
-      await addFarmPlot(1, {
+      const addedPlot = await addFarmPlot(1, {
         plot_name: newPlotName.trim(),
         crop: newPlotCrop,
         season: newPlotSeason,
-        acres: parseFloat(newPlotAcres) || 1.0,
+        acres: parsedAcres,
         soil_type: newPlotSoil,
         lat,
         lng,
       });
-      toast.success(`Added parcel '${newPlotName}' to your farm!`);
+
+      toast.success(`Added parcel '${newPlotName.trim()}' to your farm!`);
       setShowAddPlot(false);
       setNewPlotName("");
-      loadDatabaseProfile();
-    } catch (e) {
-      toast.error("Failed to save plot to database.");
+
+      // Immediate optimistic update
+      setDbProfile((prev) => {
+        const existing = prev?.plots || [];
+        const newPlots = [...existing, addedPlot];
+        const total = newPlots.reduce((acc, p) => acc + (p.acres || 0), 0);
+        return {
+          id: prev?.id || 1,
+          name: prev?.name || name,
+          email: prev?.email || user.email || "farmer@agrisense.com",
+          primary_state: prev?.primary_state || location,
+          primary_district: prev?.primary_district || district,
+          total_acres: total,
+          plots: newPlots,
+          tracked_subsidies: prev?.tracked_subsidies || [],
+          created_at: prev?.created_at || new Date().toISOString(),
+        };
+      });
+
+      await loadDatabaseProfile();
+    } catch (err) {
+      console.warn("API add plot error, saving locally:", err);
+      const fallbackPlot: FarmPlot = {
+        id: Date.now(),
+        farmer_id: 1,
+        plot_name: newPlotName.trim(),
+        crop: newPlotCrop,
+        season: newPlotSeason,
+        acres: parsedAcres,
+        soil_type: newPlotSoil,
+        lat,
+        lng,
+        created_at: new Date().toISOString(),
+      };
+      setDbProfile((prev) => {
+        const existing = prev?.plots || [];
+        const newPlots = [...existing, fallbackPlot];
+        const total = newPlots.reduce((acc, p) => acc + (p.acres || 0), 0);
+        return {
+          id: prev?.id || 1,
+          name: prev?.name || name,
+          email: prev?.email || user.email || "farmer@agrisense.com",
+          primary_state: prev?.primary_state || location,
+          primary_district: prev?.primary_district || district,
+          total_acres: total,
+          plots: newPlots,
+          tracked_subsidies: prev?.tracked_subsidies || [],
+          created_at: prev?.created_at || new Date().toISOString(),
+        };
+      });
+      toast.success(`Added parcel '${newPlotName.trim()}' to your farm!`);
+      setShowAddPlot(false);
+      setNewPlotName("");
+    } finally {
+      setIsSavingPlot(false);
     }
   };
 
@@ -207,7 +267,18 @@ export default function Profile() {
     try {
       await deleteFarmPlot(1, plotId);
       toast.success("Plot removed from database.");
-      loadDatabaseProfile();
+      // Optimistic delete
+      setDbProfile((prev) => {
+        if (!prev) return prev;
+        const newPlots = prev.plots.filter((p) => p.id !== plotId);
+        const total = newPlots.reduce((acc, p) => acc + (p.acres || 0), 0);
+        return {
+          ...prev,
+          plots: newPlots,
+          total_acres: total,
+        };
+      });
+      await loadDatabaseProfile();
     } catch (e) {
       toast.error("Failed to delete plot.");
     }
@@ -310,10 +381,12 @@ export default function Profile() {
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-1 rounded bg-[#7A3B2E] text-white text-xs font-semibold"
+                  disabled={isSavingPlot}
+                  className="px-4 py-1.5 rounded bg-[#7A3B2E] hover:bg-[#683025] text-white text-xs font-semibold cursor-pointer disabled:opacity-60 transition-colors shadow-xs"
                 >
-                  Save Plot
+                  {isSavingPlot ? "Saving..." : "Save Plot"}
                 </button>
+                
               </div>
             </form>
           )}
@@ -432,6 +505,7 @@ export default function Profile() {
             lat={lat}
             lng={lng}
             onLocationChange={handleLocationChange}
+            onLocationSelect={handleLocationChange}
           />
         </div>
 

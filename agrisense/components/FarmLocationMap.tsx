@@ -24,7 +24,10 @@ interface FarmLocationMapProps {
   initialLat?: number;
   initialLng?: number;
   initialLocation?: string;
-  onLocationSelect: (data: FarmLocationData) => void;
+  lat?: number;
+  lng?: number;
+  onLocationSelect?: (data: FarmLocationData) => void;
+  onLocationChange?: (data: FarmLocationData) => void;
 }
 
 // Current agricultural season calculator for India
@@ -301,7 +304,10 @@ export default function FarmLocationMap({
   initialLat = 30.9010,
   initialLng = 75.8573,
   initialLocation = "Punjab",
+  lat,
+  lng,
   onLocationSelect,
+  onLocationChange,
 }: FarmLocationMapProps) {
   const { t } = useLanguage();
   const mapContainerRef = useRef<HTMLDivElement>(null);
@@ -311,9 +317,12 @@ export default function FarmLocationMap({
 
   const [activeLayer, setActiveLayer] = useState<"satellite" | "terrain" | "streets">("satellite");
 
+  const startLat = lat !== undefined ? lat : initialLat;
+  const startLng = lng !== undefined ? lng : initialLng;
+
   const [coords, setCoords] = useState<{ lat: number; lng: number }>({
-    lat: initialLat,
-    lng: initialLng,
+    lat: startLat,
+    lng: startLng,
   });
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState<any[]>([]);
@@ -440,7 +449,8 @@ export default function FarmLocationMap({
       };
 
       setLocationDetails(updated);
-      onLocationSelect(updated);
+      if (typeof onLocationSelect === "function") onLocationSelect(updated);
+      if (typeof onLocationChange === "function") onLocationChange(updated);
 
       if (markerInstanceRef.current) {
         markerInstanceRef.current

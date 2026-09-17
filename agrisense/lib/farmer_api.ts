@@ -1,4 +1,11 @@
-const BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL || process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+function getBaseUrl(): string {
+  if (typeof window !== "undefined") {
+    if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
+      return "http://localhost:8000";
+    }
+  }
+  return process.env.NEXT_PUBLIC_BACKEND_URL || process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+}
 
 export interface FarmPlot {
   id: number;
@@ -42,7 +49,7 @@ export interface FarmerProfile {
 }
 
 export async function getFarmerProfile(farmerId = 1): Promise<FarmerProfile> {
-  const res = await fetch(`${BASE_URL}/api/farmer/profile/${farmerId}`, {
+  const res = await fetch(`${getBaseUrl()}/api/farmer/profile/${farmerId}`, {
     cache: "no-store",
   });
   if (!res.ok) {
@@ -57,7 +64,7 @@ export async function updateFarmerProfile(farmerId: number, data: {
   primary_state?: string;
   primary_district?: string;
 }): Promise<FarmerProfile> {
-  const res = await fetch(`${BASE_URL}/api/farmer/profile/${farmerId}`, {
+  const res = await fetch(`${getBaseUrl()}/api/farmer/profile/${farmerId}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
@@ -78,7 +85,7 @@ export async function addFarmPlot(farmerId: number, plotData: {
   lng?: number;
   irrigation_type?: string;
 }): Promise<FarmPlot> {
-  const res = await fetch(`${BASE_URL}/api/farmer/${farmerId}/plots`, {
+  const res = await fetch(`${getBaseUrl()}/api/farmer/${farmerId}/plots`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(plotData),
@@ -90,7 +97,7 @@ export async function addFarmPlot(farmerId: number, plotData: {
 }
 
 export async function deleteFarmPlot(farmerId: number, plotId: number): Promise<boolean> {
-  const res = await fetch(`${BASE_URL}/api/farmer/${farmerId}/plots/${plotId}`, {
+  const res = await fetch(`${getBaseUrl()}/api/farmer/${farmerId}/plots/${plotId}`, {
     method: "DELETE",
   });
   if (!res.ok) {
@@ -107,7 +114,7 @@ export async function trackSubsidyApplication(farmerId: number, data: {
   applied_date?: string;
   notes?: string;
 }): Promise<TrackedSubsidy> {
-  const res = await fetch(`${BASE_URL}/api/farmer/${farmerId}/subsidies/track`, {
+  const res = await fetch(`${getBaseUrl()}/api/farmer/${farmerId}/subsidies/track`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
@@ -123,7 +130,7 @@ export async function updateTrackedSubsidy(farmerId: number, trackId: number, da
   application_ref_number?: string;
   notes?: string;
 }): Promise<TrackedSubsidy> {
-  const res = await fetch(`${BASE_URL}/api/farmer/${farmerId}/subsidies/${trackId}`, {
+  const res = await fetch(`${getBaseUrl()}/api/farmer/${farmerId}/subsidies/${trackId}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
