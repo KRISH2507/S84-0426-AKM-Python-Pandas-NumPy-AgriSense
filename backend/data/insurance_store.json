@@ -1,0 +1,72 @@
+{
+  "statutory_rules": {
+    "rabi_food_oilseeds": {
+      "farmer_rate_pct": 1.5,
+      "description": "Statutory maximum farmer premium for all Food & Oilseed crops in Rabi season under PMFBY.",
+      "crops": ["Wheat", "Mustard", "Chickpea", "Barley", "Gram", "Lentil"]
+    },
+    "kharif_food_oilseeds": {
+      "farmer_rate_pct": 2.0,
+      "description": "Statutory maximum farmer premium for all Food & Oilseed crops in Kharif season under PMFBY.",
+      "crops": ["Rice", "Maize", "Soybean", "Cotton", "Groundnut", "Bajra", "Jowar"]
+    },
+    "annual_commercial_horticulture": {
+      "farmer_rate_pct": 5.0,
+      "description": "Statutory maximum farmer premium for Annual Commercial / Horticultural crops under PMFBY / WBCIS.",
+      "crops": ["Tomato", "Potato", "Onion", "Sugarcane", "Chilli", "Garlic", "Ginger"]
+    }
+  },
+  "benchmark_actuarial_rate_pct": 10.5,
+  "government_share_split": {
+    "central_share_pct": 50.0,
+    "state_share_pct": 50.0
+  },
+  "insurance_providers": [
+    {
+      "name": "Agriculture Insurance Company of India (AIC)",
+      "type": "Public Sector Underwriter",
+      "claim_settlement_ratio_pct": 94.2,
+      "helpline": "1800-116-515"
+    },
+    {
+      "name": "HDFC ERGO General Insurance",
+      "type": "Empaneled Private Underwriter",
+      "claim_settlement_ratio_pct": 91.8,
+      "helpline": "1800-266-0700"
+    },
+    {
+      "name": "SBI General Insurance",
+      "type": "Empaneled Banking Underwriter",
+      "claim_settlement_ratio_pct": 93.4,
+      "helpline": "1800-102-1111"
+    },
+    {
+      "name": "Bajaj Allianz General Insurance",
+      "type": "Empaneled Private Underwriter",
+      "claim_settlement_ratio_pct": 90.5,
+      "helpline": "1800-209-5858"
+    }
+  ],
+  "claim_triggers": [
+    {
+      "stage": "Prevented Sowing / Planting Risk",
+      "description": "Deficit rainfall or adverse seasonal conditions preventing 75% of normal sown area in notified unit.",
+      "payout_pct": 25.0
+    },
+    {
+      "stage": "Mid-Season Adversity",
+      "description": "Severe drought, dry spells, unseasonal heavy floods during standing crop cycle.",
+      "payout_pct": 25.0
+    },
+    {
+      "stage": "Post-Harvest Losses",
+      "description": "Unseasonal rainfall or cyclonic inundation while harvested crop is drying in the field (up to 14 days).",
+      "payout_pct": 100.0
+    },
+    {
+      "stage": "Localized Calamities",
+      "description": "Isolated hailstorm, landslide, cloudburst, or inundation affecting individual farm survey numbers.",
+      "payout_pct": 100.0
+    }
+  ]
+}

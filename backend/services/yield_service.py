@@ -25,9 +25,9 @@ class YieldService:
     def _load_model(self):
         if self.model_path.exists():
             self.model = joblib.load(self.model_path)
-            print(f"✅ Yield Predictor Model loaded from {self.model_path}")
+            print(f"[OK] Yield Predictor Model loaded from {self.model_path}")
         else:
-            print(f"⚠️ Warning: Model not found at {self.model_path}. Using fallback simulation mode.")
+            print(f"[WARN] Warning: Model not found at {self.model_path}. Using fallback simulation mode.")
 
     def predict_yield(self, crop: str, rainfall: float, fertilizer: float, season: str, soil_type: str, acres: float) -> dict:
         crop_lower = crop.lower()

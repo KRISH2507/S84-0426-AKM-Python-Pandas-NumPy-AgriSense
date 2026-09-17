@@ -1,0 +1,373 @@
+{
+  "active_schemes": [
+    {
+      "title": "Government of Punjab Announcement:",
+      "category": "Government Farm Assistance",
+      "provider": "Punjab Government",
+      "applicable_states": [
+        "Punjab"
+      ],
+      "applicable_crops": [
+        "Rice"
+      ],
+      "farmer_categories": [
+        "Marginal (<2.5 acres)",
+        "Small (2.5-5 acres)",
+        "Medium / Large (>5 acres)"
+      ],
+      "min_acres": null,
+      "max_acres": null,
+      "benefit_type": "Direct Subsidy Support",
+      "benefit_summary": "Financial benefit estimated up to ₹2,000.",
+      "estimated_annual_benefit_inr": 2000.0,
+      "subsidy_rate": "Government Notified Rate",
+      "deadline": "2026-11-30",
+      "urgency": "Active Enrollment",
+      "required_documents": [
+        "Aadhaar Card",
+        "Land Ownership Record (Khasra / 7/12)",
+        "Bank Account Passbook"
+      ],
+      "official_url": "https://agri.punjab.gov.in/green-manure-2026",
+      "description": "Government of Punjab Announcement:\nThe Department of Agriculture, Punjab hereby notifies a Special Green Manuring Incentive Scheme for 2026.\nFarmers adopting Dhaincha or Sunhemp green manuring before ...",
+      "id": "scheme_9450b130"
+    },
+    {
+      "id": "pm_kisan_01",
+      "title": "PM-KISAN (Pradhan Mantri Kisan Samman Nidhi)",
+      "category": "Direct Income Support",
+      "provider": "Central Government",
+      "applicable_states": [
+        "ALL"
+      ],
+      "applicable_crops": [
+        "ALL"
+      ],
+      "farmer_categories": [
+        "Marginal (<2.5 acres)",
+        "Small (2.5-5 acres)",
+        "Medium / Large (>5 acres)"
+      ],
+      "min_acres": null,
+      "max_acres": null,
+      "benefit_type": "Direct Cash Transfer",
+      "benefit_summary": "₹6,000 per year in 3 equal installments of ₹2,000 directly to bank accounts via DBT.",
+      "estimated_annual_benefit_inr": 6000,
+      "subsidy_rate": "100% Direct Support",
+      "deadline": "2026-12-31",
+      "urgency": "Ongoing / Open Enrollment",
+      "required_documents": [
+        "Aadhaar Card linked with Bank Account",
+        "Landholding Records (Khatauni / Khasra / 7/12)",
+        "Bank Passbook with active e-KYC"
+      ],
+      "official_url": "https://pmkisan.gov.in",
+      "description": "Income support to all landholding farmer families across the country to assist in procuring agricultural inputs and domestic needs."
+    },
+    {
+      "id": "pmksy_drip_02",
+      "title": "PMKSY - Per Drop More Crop (Micro Irrigation Subsidy)",
+      "category": "Irrigation Equipment",
+      "provider": "Central & State Joint Initiative",
+      "applicable_states": [
+        "ALL"
+      ],
+      "applicable_crops": [
+        "Wheat",
+        "Rice",
+        "Cotton",
+        "Sugarcane",
+        "Tomato",
+        "Potato",
+        "Onion",
+        "Maize",
+        "Mustard"
+      ],
+      "farmer_categories": [
+        "Marginal (<2.5 acres)",
+        "Small (2.5-5 acres)",
+        "Medium / Large (>5 acres)"
+      ],
+      "min_acres": 0.5,
+      "max_acres": 12.5,
+      "benefit_type": "Capital Equipment Subsidy",
+      "benefit_summary": "55% subsidy on Drip/Sprinkler systems for Small & Marginal farmers; 45% subsidy for other farmers.",
+      "estimated_annual_benefit_inr": 35000,
+      "subsidy_rate": "55% for Small/Marginal, 45% for Large",
+      "deadline": "2026-10-15",
+      "urgency": "High - Sowing Season Window",
+      "required_documents": [
+        "Land Record (Jamabandi / Khasra)",
+        "Water Source Availability Certificate / Well proof",
+        "Aadhaar & Bank Details",
+        "Soil/Water Testing Report"
+      ],
+      "official_url": "https://pmksy.gov.in",
+      "description": "Promotes micro-irrigation technologies (Drip & Sprinkler) to improve farm water use efficiency and enhance crop productivity."
+    },
+    {
+      "id": "pm_kusum_solar_03",
+      "title": "PM-KUSUM (Solar Agricultural Pump Subsidy)",
+      "category": "Renewable Energy & Power",
+      "provider": "Ministry of New and Renewable Energy",
+      "applicable_states": [
+        "ALL"
+      ],
+      "applicable_crops": [
+        "ALL"
+      ],
+      "farmer_categories": [
+        "Marginal (<2.5 acres)",
+        "Small (2.5-5 acres)",
+        "Medium / Large (>5 acres)"
+      ],
+      "min_acres": 1.0,
+      "max_acres": null,
+      "benefit_type": "Capital Asset Subsidy",
+      "benefit_summary": "Up to 60% subsidy (30% Central + 30% State) for standalone solar agriculture pumps (3HP, 5HP, 7.5HP). Farmer pays only 10-40%.",
+      "estimated_annual_benefit_inr": 120000,
+      "subsidy_rate": "60% Combined Subsidy",
+      "deadline": "2026-11-30",
+      "urgency": "High - Limited District Quotas",
+      "required_documents": [
+        "Farmer ID & Aadhaar Card",
+        "Land Ownership Proof (Fard / Khasra)",
+        "Affidavit of No Existing Electric Tubewell Connection",
+        "Bank Account Details"
+      ],
+      "official_url": "https://pmkusum.mnre.gov.in",
+      "description": "Enables farmers to install solar-powered irrigation pumps, replacing diesel pumps and ensuring uninterrupted daylight irrigation."
+    },
+    {
+      "id": "smam_machinery_04",
+      "title": "SMAM (Sub-Mission on Agricultural Mechanization)",
+      "category": "Farm Machinery & Implements",
+      "provider": "Department of Agriculture & Farmers Welfare",
+      "applicable_states": [
+        "ALL"
+      ],
+      "applicable_crops": [
+        "ALL"
+      ],
+      "farmer_categories": [
+        "Marginal (<2.5 acres)",
+        "Small (2.5-5 acres)",
+        "Medium / Large (>5 acres)"
+      ],
+      "min_acres": null,
+      "max_acres": null,
+      "benefit_type": "Machinery Purchase Subsidy",
+      "benefit_summary": "40% to 50% subsidy on rotavators, power tillers, laser land levelers, seed drills, and custom hiring centers.",
+      "estimated_annual_benefit_inr": 65000,
+      "subsidy_rate": "40% - 50% on Purchase Cost",
+      "deadline": "2026-09-30",
+      "urgency": "Expiring Soon - 16 Days Left",
+      "required_documents": [
+        "Land Record Proof (Copy of RoR)",
+        "Aadhaar Card",
+        "Quotation / Proforma Invoice from Authorized Dealer",
+        "Caste Certificate (if SC/ST/OBC for additional 10% benefit)"
+      ],
+      "official_url": "https://agrimachinery.nic.in",
+      "description": "Financial assistance to purchase farm implements to increase mechanization, reduce labor dependency, and boost harvest speed."
+    },
+    {
+      "id": "pb_dsr_incentive_05",
+      "title": "Punjab DSR (Direct Seeding of Rice) Incentive",
+      "category": "Water Conservation & Crop Practice",
+      "provider": "Government of Punjab",
+      "applicable_states": [
+        "Punjab"
+      ],
+      "applicable_crops": [
+        "Rice"
+      ],
+      "farmer_categories": [
+        "Marginal (<2.5 acres)",
+        "Small (2.5-5 acres)",
+        "Medium / Large (>5 acres)"
+      ],
+      "min_acres": 0.5,
+      "max_acres": 25.0,
+      "benefit_type": "Direct Acreage Incentive",
+      "benefit_summary": "Direct cash incentive of ₹1,500 per acre for adopting direct seeding of rice instead of puddle transplantation.",
+      "estimated_annual_benefit_inr": 7500,
+      "subsidy_rate": "₹1,500 per acre",
+      "deadline": "2026-10-01",
+      "urgency": "Expiring Soon",
+      "required_documents": [
+        "Aadhaar Card",
+        "Punjab Land Verification Fard",
+        "Geo-tagged Verification Photo by Agriculture Officer",
+        "Bank Account Details"
+      ],
+      "official_url": "https://agri.punjab.gov.in",
+      "description": "Encourages water conservation in Punjab by replacing traditional flood-irrigation paddy transplanting with Direct Seeded Rice technology."
+    },
+    {
+      "id": "hr_mera_pani_06",
+      "title": "Haryana - Mera Pani Meri Virasat (Crop Diversification)",
+      "category": "Crop Diversification Subsidy",
+      "provider": "Government of Haryana",
+      "applicable_states": [
+        "Haryana"
+      ],
+      "applicable_crops": [
+        "Maize",
+        "Cotton",
+        "Soybean",
+        "Mustard",
+        "Chickpea"
+      ],
+      "farmer_categories": [
+        "Marginal (<2.5 acres)",
+        "Small (2.5-5 acres)",
+        "Medium / Large (>5 acres)"
+      ],
+      "min_acres": 1.0,
+      "max_acres": 20.0,
+      "benefit_type": "Per Acre Direct Incentive",
+      "benefit_summary": "Financial assistance of ₹7,000 per acre to farmers who switch from water-guzzling paddy to alternative crops.",
+      "estimated_annual_benefit_inr": 28000,
+      "subsidy_rate": "₹7,000 per acre",
+      "deadline": "2026-10-31",
+      "urgency": "Active Enrollment",
+      "required_documents": [
+        "Meri Fasal Mera Byora (MFMB) Registration ID",
+        "Parivar Pehchan Patra (Family ID)",
+        "Bank Passbook Copy",
+        "Land Record Verification"
+      ],
+      "official_url": "https://fasal.haryana.gov.in",
+      "description": "Financial incentive to shift acreage away from paddy towards cotton, maize, pulses, or horticulture to save underground water tables."
+    },
+    {
+      "id": "up_beej_gram_07",
+      "title": "Uttar Pradesh - Beej Gram Yojana (Certified Seed Subsidy)",
+      "category": "High-Yield Certified Seeds",
+      "provider": "Government of Uttar Pradesh",
+      "applicable_states": [
+        "Uttar Pradesh"
+      ],
+      "applicable_crops": [
+        "Wheat",
+        "Rice",
+        "Mustard",
+        "Chickpea"
+      ],
+      "farmer_categories": [
+        "Marginal (<2.5 acres)",
+        "Small (2.5-5 acres)"
+      ],
+      "min_acres": 0.5,
+      "max_acres": 5.0,
+      "benefit_type": "Seed Purchase Discount",
+      "benefit_summary": "50% direct subsidy on certified high-yielding foundation seeds for small and marginal farmers.",
+      "estimated_annual_benefit_inr": 4500,
+      "subsidy_rate": "50% of Foundation Seed Cost",
+      "deadline": "2026-11-15",
+      "urgency": "Rabi Sowing Preparations",
+      "required_documents": [
+        "UP Agriculture Department DBT Registration Number",
+        "Kisan Credit Card (KCC) or Land Fard",
+        "Aadhaar Card"
+      ],
+      "official_url": "http://upagripardarshi.gov.in",
+      "description": "Distribution of certified foundation seeds of high-yielding crop varieties at 50% discount to upgrade farm productivity."
+    },
+    {
+      "id": "mh_krishi_swavalamban_08",
+      "title": "Maharashtra - Dr. Babasaheb Ambedkar Krishi Swavalamban",
+      "category": "Farm Well & Micro Irrigation",
+      "provider": "Government of Maharashtra",
+      "applicable_states": [
+        "Maharashtra"
+      ],
+      "applicable_crops": [
+        "ALL"
+      ],
+      "farmer_categories": [
+        "Marginal (<2.5 acres)",
+        "Small (2.5-5 acres)"
+      ],
+      "min_acres": 0.4,
+      "max_acres": 6.0,
+      "benefit_type": "New Well & Pump Package",
+      "benefit_summary": "Up to ₹2,50,000 for digging new farm wells, ₹50,000 for solar/electric pumps, and ₹50,000 for micro-irrigation.",
+      "estimated_annual_benefit_inr": 180000,
+      "subsidy_rate": "Up to 100% for Selected Eligible Components",
+      "deadline": "2026-12-15",
+      "urgency": "Active Scheme",
+      "required_documents": [
+        "7/12 and 8-A Extract Records",
+        "Aadhaar Card & Caste Certificate",
+        "Income Certificate (< ₹1.5 Lakhs)",
+        "Groundwater Survey Certificate"
+      ],
+      "official_url": "https://mahadbt.maharashtra.gov.in",
+      "description": "Special assistance package providing irrigation facilities, new dug wells, in-well bore, and pump sets for sustainable agriculture."
+    },
+    {
+      "id": "soil_health_card_09",
+      "title": "Soil Health Card Scheme (Free Soil Testing & Micronutrient Subsidy)",
+      "category": "Soil Fertility & Fertilizers",
+      "provider": "Ministry of Agriculture & Farmers Welfare",
+      "applicable_states": [
+        "ALL"
+      ],
+      "applicable_crops": [
+        "ALL"
+      ],
+      "farmer_categories": [
+        "Marginal (<2.5 acres)",
+        "Small (2.5-5 acres)",
+        "Medium / Large (>5 acres)"
+      ],
+      "min_acres": null,
+      "max_acres": null,
+      "benefit_type": "Free Testing & 50% Micronutrient Grant",
+      "benefit_summary": "100% free comprehensive soil test (12 nutrients) + 50% subsidy on recommended bio-fertilizers and gypsum.",
+      "estimated_annual_benefit_inr": 3500,
+      "subsidy_rate": "Free Analysis + 50% Micronutrients",
+      "deadline": "2026-12-31",
+      "urgency": "Ongoing Facility",
+      "required_documents": [
+        "Farmer Land Details",
+        "Aadhaar Card",
+        "Soil Sample from Plot"
+      ],
+      "official_url": "https://soilhealth.dac.gov.in",
+      "description": "Issues customized soil health cards assessing 12 macro/micronutrients and gives dosage advice to cut fertilizer costs by 20%."
+    }
+  ],
+  "historical_schemes": [
+    {
+      "id": "pm_kisan_mandhan_past",
+      "title": "Pradhan Mantri Kisan Maan Dhan Yojana (Phase 1)",
+      "category": "Old Age Pension",
+      "provider": "Central Government",
+      "applicable_states": [
+        "ALL"
+      ],
+      "applicable_crops": [
+        "ALL"
+      ],
+      "deadline": "2025-12-31",
+      "status": "Archived / Converted",
+      "reason": "Enrollment window closed and migrated to unified social security registry."
+    }
+  ],
+  "metadata": {
+    "last_sync_timestamp": "2026-09-14T04:34:29.676626Z",
+    "total_active": 10,
+    "total_historical": 1,
+    "sources_monitored": [
+      "https://myscheme.gov.in",
+      "https://agricoop.nic.in",
+      "https://pmkisan.gov.in",
+      "https://pmfby.gov.in",
+      "https://fasal.haryana.gov.in",
+      "https://agri.punjab.gov.in"
+    ]
+  }
+}

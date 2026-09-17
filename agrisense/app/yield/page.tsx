@@ -5,9 +5,11 @@ import ProtectedRoute from "@/components/ProtectedRoute";
 import { predictYield } from "@/lib/api";
 import { Sprout, Droplets, MapPin, GaugeCircle } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function YieldPredictor() {
   const { user } = useAuth();
+  const { t } = useLanguage();
   
   const [params, setParams] = useState({
     crop: user.crop || "Wheat",
@@ -30,13 +32,7 @@ export default function YieldPredictor() {
     setError(null);
     try {
       const res = await predictYield(currentParams);
-      // Safely parse typical responses (e.g. { predicted_yield: 2500, confidence: 0.85 })
       const rawYield = res?.predicted_yield || res?.yield || 2345;
-      
-      // Assume API returns total, but we divide to store per acre, OR API might return per acre directly.
-      // Usually Yield model returns total if field_acres passed, or per acre. 
-      // The prompt says: "The final predicted yield must be multiplied by field_acres".
-      // Meaning the API returns per acre.
       setPredictedYieldPerAcre(rawYield);
       setConfidence(res?.confidence_pct ? res.confidence_pct / 100 : res?.confidence || 0.87);
     } catch (err) {
@@ -77,10 +73,10 @@ export default function YieldPredictor() {
       <div className="flex flex-col gap-6 max-w-[1100px] w-full mx-auto">
         <section className="flex flex-col gap-2 border-b-[0.5px] border-[#D9CEB8] pb-6">
           <h1 className="font-display font-semibold text-[28px] text-[#2C2416]">
-            Yield Sandbox Simulator
+            {t("yield.title")}
           </h1>
           <p className="font-body text-[#7A6A55] text-[14px]">
-            Adjust environmental metrics to simulate expected output.
+            {t("yield.subtitle")}
           </p>
         </section>
 
@@ -89,25 +85,29 @@ export default function YieldPredictor() {
           {/* Controls Panel */}
           <section className="bg-[#FDFAF4] border-[0.5px] border-[#D9CEB8] rounded-[16px] p-6 shadow-sm flex flex-col gap-8">
             <h2 className="font-display font-medium text-[16px] text-[#2C2416] flex items-center gap-2">
-              <GaugeCircle size={18} className="text-[#C9A97A]" /> Configure Inputs
+              <GaugeCircle size={18} className="text-[#C9A97A]" /> {t("yield.configureInputs")}
             </h2>
 
             {/* Dropdowns */}
             <div className="grid grid-cols-2 gap-4">
               <div className="flex flex-col gap-2">
-                <label className="text-[12px] font-medium text-[#7A6A55] uppercase tracking-wider">Crop</label>
+                <label className="text-[12px] font-medium text-[#7A6A55] uppercase tracking-wider">
+                  {t("yield.crop")}
+                </label>
                 <select name="crop" value={params.crop} onChange={handleChange} className="p-3 bg-white border border-[#D9CEB8] rounded-[8px] text-[14px] text-[#2C2416] focus:outline-none focus:ring-1 focus:ring-[#5C7A52]">
-                  <option>Wheat</option>
-                  <option>Rice</option>
-                  <option>Maize</option>
+                  <option value="Wheat">{t("crop.Wheat")}</option>
+                  <option value="Rice">{t("crop.Rice")}</option>
+                  <option value="Maize">{t("crop.Maize")}</option>
                 </select>
               </div>
               <div className="flex flex-col gap-2">
-                <label className="text-[12px] font-medium text-[#7A6A55] uppercase tracking-wider">Season</label>
+                <label className="text-[12px] font-medium text-[#7A6A55] uppercase tracking-wider">
+                  {t("yield.season")}
+                </label>
                 <select name="season" value={params.season} onChange={handleChange} className="p-3 bg-white border border-[#D9CEB8] rounded-[8px] text-[14px] text-[#2C2416] focus:outline-none focus:ring-1 focus:ring-[#5C7A52]">
-                  <option>Rabi</option>
-                  <option>Kharif</option>
-                  <option>Zaid</option>
+                  <option value="Rabi">{t("season.Rabi")}</option>
+                  <option value="Kharif">{t("season.Kharif")}</option>
+                  <option value="Zaid">{t("season.Zaid")}</option>
                 </select>
               </div>
             </div>
@@ -117,7 +117,7 @@ export default function YieldPredictor() {
               <div className="flex flex-col gap-3">
                 <div className="flex justify-between items-center text-[13px]">
                   <label className="font-medium text-[#2C2416] flex items-center gap-2">
-                    <Droplets size={14} className="text-[#5C7A52]" /> Rainfall Volume
+                    <Droplets size={14} className="text-[#5C7A52]" /> {t("yield.rainfallVolume")}
                   </label>
                   <span className="text-[#7A6A55]">{params.rainfall_mm} mm</span>
                 </div>
@@ -130,7 +130,7 @@ export default function YieldPredictor() {
               <div className="flex flex-col gap-3">
                 <div className="flex justify-between items-center text-[13px]">
                   <label className="font-medium text-[#2C2416] flex items-center gap-2">
-                    <Sprout size={14} className="text-[#C9A97A]" /> Fertilizer Factor
+                    <Sprout size={14} className="text-[#C9A97A]" /> {t("yield.fertilizerFactor")}
                   </label>
                   <span className="text-[#7A6A55]">{params.fertilizer_pct}%</span>
                 </div>
@@ -143,9 +143,9 @@ export default function YieldPredictor() {
               <div className="flex flex-col gap-3">
                 <div className="flex justify-between items-center text-[13px]">
                   <label className="font-medium text-[#2C2416] flex items-center gap-2">
-                    <MapPin size={14} className="text-[#7A3B2E]" /> Field Size
+                    <MapPin size={14} className="text-[#7A3B2E]" /> {t("yield.fieldSize")}
                   </label>
-                  <span className="text-[#7A6A55]">{params.field_acres} Acres</span>
+                  <span className="text-[#7A6A55]">{params.field_acres} {t("common.acres")}</span>
                 </div>
                 <input 
                   type="range" name="field_acres" min="1" max="100" value={params.field_acres} onChange={handleChange}
@@ -163,7 +163,7 @@ export default function YieldPredictor() {
 
             <div className="flex flex-col gap-2">
               <span className="uppercase tracking-[0.14em] text-[#7A6A55] text-[10px] font-medium block">
-                Live Prediction Engine
+                {t("yield.liveEngine")}
               </span>
               <div className="h-[90px] flex items-center justify-center">
                 {loading ? (
@@ -174,7 +174,9 @@ export default function YieldPredictor() {
                   </h3>
                 )}
               </div>
-              <p className="font-body text-[14px] text-[#7A6A55]">Total expected output across {params.field_acres} acres</p>
+              <p className="font-body text-[14px] text-[#7A6A55]">
+                {t("yield.totalExpectedAcross")} {params.field_acres} {t("common.acres")}
+              </p>
             </div>
 
             {/* Error or Badges */}
@@ -183,12 +185,16 @@ export default function YieldPredictor() {
             ) : (
               <div className="grid grid-cols-2 gap-4 w-full mt-4">
                 <div className="bg-[#F5F1EA] rounded-[10px] py-4 px-3 flex flex-col items-center justify-center gap-1 border border-[#D9CEB8]">
-                  <span className="text-[10px] uppercase font-semibold text-[#7A6A55] tracking-wider">Confidence Level</span>
+                  <span className="text-[10px] uppercase font-semibold text-[#7A6A55] tracking-wider">
+                    {t("yield.confidenceLevel")}
+                  </span>
                   <span className="font-display text-[20px] font-medium text-[#5C7A52]">{Math.round(confidence * 100)}%</span>
                 </div>
                 
                 <div className={`rounded-[10px] py-4 px-3 flex flex-col items-center justify-center gap-1 border ` + (isAboveBaseline ? 'bg-[#DDE8D9] border-[#A8C4A1]' : 'bg-[#FDFAF4] border-[#E8DFC9]')}>
-                  <span className="text-[10px] uppercase font-semibold text-[#7A6A55] tracking-wider">Vs Historical Avg</span>
+                  <span className="text-[10px] uppercase font-semibold text-[#7A6A55] tracking-wider">
+                    {t("yield.vsHistoricalAvg")}
+                  </span>
                   <span className={`font-display text-[20px] font-medium ` + (isAboveBaseline ? 'text-[#3A5E32]' : 'text-[#7A3B2E]')}>
                     {isAboveBaseline ? '+' : ''}{Math.round(((predictedYieldPerAcre || baselineYieldPerAcre) - baselineYieldPerAcre) / baselineYieldPerAcre * 100)}%
                   </span>
